@@ -26,20 +26,19 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({ category, isActive, onC
     <button
       onClick={onClick}
       className={cn(
-        "flex items-center w-full px-4 py-3 rounded-xl mb-3 transition-all duration-300",
-        "hover:bg-tech-primary-purple hover:text-white hover:shadow-md",
+        "flex items-center w-full px-3 py-2.5 rounded-lg mb-1.5 transition-all duration-200",
         isActive
-          ? "bg-gradient-to-r from-tech-primary-purple to-tech-secondary-purple text-white shadow-md"
-          : "bg-sidebar-accent text-sidebar-foreground"
+          ? "bg-tech-primary-purple/10 text-tech-primary-purple font-medium"
+          : "bg-transparent text-gray-600 hover:bg-gray-100"
       )}
     >
       <div className={cn(
-        "flex items-center justify-center w-8 h-8 rounded-lg mr-3",
-        isActive ? "bg-white/20" : "bg-sidebar-accent-foreground/10"
+        "flex items-center justify-center w-6 h-6 mr-2.5",
+        isActive ? "text-tech-primary-purple" : "text-gray-400"
       )}>
-        <IconComponent className="w-5 h-5" />
+        <IconComponent className="w-4 h-4" />
       </div>
-      <span className="font-medium">{category.name}</span>
+      <span>{category.name}</span>
     </button>
   );
 };
