@@ -56,8 +56,9 @@
   body {
     @apply bg-gray-50 text-foreground font-sans;
     background-image: 
-      radial-gradient(at 30% 20%, rgba(155, 135, 245, 0.03) 0px, transparent 50%),
-      radial-gradient(at 80% 70%, rgba(30, 174, 219, 0.03) 0px, transparent 50%);
+      radial-gradient(at 30% 20%, rgba(155, 135, 245, 0.05) 0px, transparent 50%),
+      radial-gradient(at 80% 70%, rgba(30, 174, 219, 0.05) 0px, transparent 50%),
+      linear-gradient(135deg, rgba(155, 135, 245, 0.02) 0%, rgba(30, 174, 219, 0.02) 100%);
     background-attachment: fixed;
   }
 
@@ -76,13 +77,11 @@
   }
   
   ::-webkit-scrollbar-thumb {
-    @apply bg-gray-200 rounded;
     background: linear-gradient(to bottom, #9b87f5, #33C3F0);
     border-radius: 10px;
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-300;
     background: linear-gradient(to bottom, #9b87f5, #1EAEDB);
   }
 }
@@ -122,7 +121,44 @@
   }
   
   .card-shadow {
-    box-shadow: 0 4px 20px rgba(155, 135, 245, 0.05);
+    box-shadow: 0 4px 20px rgba(155, 135, 245, 0.1);
+  }
+  
+  /* 科技风格特效 */
+  .tech-border {
+    @apply relative overflow-hidden before:absolute before:inset-0 before:p-[1px] before:bg-gradient-to-r before:from-tech-primary-purple before:to-tech-blue before:rounded-xl before:content-[''] before:pointer-events-none;
+  }
+  
+  .tech-glow {
+    @apply relative after:absolute after:inset-0 after:rounded-xl after:opacity-0 after:transition-opacity after:bg-gradient-to-r after:from-tech-primary-purple/20 after:to-tech-blue/20 after:blur-xl after:content-[''] hover:after:opacity-100;
+  }
+  
+  .tech-background {
+    @apply bg-gradient-to-br from-tech-dark-purple/90 to-tech-dark-purple/95 text-white;
+  }
+  
+  .tech-panel {
+    @apply bg-white/90 backdrop-blur-md border border-white/50 rounded-2xl shadow-sm;
+  }
+  
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+  
+  .scrollbar-thumb-tech-primary-purple\/10 {
+    scrollbar-color: rgba(155, 135, 245, 0.1) transparent;
+  }
+  
+  .scrollbar-track-transparent {
+    scrollbar-track-color: transparent;
+  }
+  
+  .tech-dot {
+    @apply w-1.5 h-1.5 rounded-full bg-gradient-to-r from-tech-primary-purple to-tech-blue;
+  }
+  
+  .tech-line {
+    @apply h-px bg-gradient-to-r from-tech-primary-purple/20 via-tech-primary-purple/40 to-tech-primary-purple/20;
   }
 }
 
@@ -148,4 +184,53 @@
 
 .hover-scale:hover {
   transform: scale(1.03);
+}
+
+/* 添加科技风格的呼吸动画效果 */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* 添加电路板样式效果 */
+.circuit-pattern {
+  background-image: radial-gradient(#9b87f5 1px, transparent 1px),
+                   linear-gradient(to right, #9b87f5 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 0;
+  background-color: rgba(255, 255, 255, 0.97);
+}
+
+/* 激光线效果 */
+@keyframes laser-line {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-laser {
+  overflow: hidden;
+  position: relative;
+}
+
+.animate-laser::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #9b87f5, transparent);
+  animation: laser-line 2s infinite;
 }
