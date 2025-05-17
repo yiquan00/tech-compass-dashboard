@@ -5,9 +5,10 @@ import ContentCard from "@/components/ContentCard";
 import FeaturedSection from "@/components/FeaturedSection";
 import { categories, contentItems, featuredItems } from "@/data/navigationData";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { Menu, Search } from "lucide-react";
+import { Menu, Search, Star } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination";
+import { Badge } from "@/components/ui/badge";
 
 const Index: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>(categories[0].id);
@@ -62,7 +63,7 @@ const Index: React.FC = () => {
       {isMobile && (
         <button
           onClick={toggleMobileSidebar}
-          className="fixed top-4 left-4 z-50 p-2 rounded-lg bg-white text-gray-600 shadow-sm border border-gray-100"
+          className="fixed top-4 left-4 z-50 p-2 rounded-xl bg-white text-gray-600 shadow-sm border border-gray-100"
         >
           <Menu size={20} />
         </button>
@@ -87,7 +88,7 @@ const Index: React.FC = () => {
       {/* Overlay for mobile sidebar */}
       {isMobile && showMobileSidebar && (
         <div
-          className="fixed inset-0 bg-black/30 backdrop-blur-sm z-30"
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-30"
           onClick={() => setShowMobileSidebar(false)}
         />
       )}
@@ -97,33 +98,35 @@ const Index: React.FC = () => {
         <div className={`max-w-7xl mx-auto p-6 md:p-8 ${isMobile ? "pt-16" : ""}`}>
           {/* Page header */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-            <h1 className="text-2xl font-semibold text-gray-800 mb-4 md:mb-0">
-              {activeCategoryName}
-            </h1>
+            <div className="flex items-center mb-4 md:mb-0">
+              <div className="w-1.5 h-8 bg-gradient-to-b from-tech-primary-purple to-tech-blue rounded-full mr-3"></div>
+              <h1 className="text-2xl font-bold text-gradient">{activeCategoryName}</h1>
+              <Badge className="ml-3 bg-tech-primary-purple/10 text-tech-primary-purple border-none">
+                {filteredItems.length} 个资源
+              </Badge>
+            </div>
             
             {/* Search input */}
-            <div className="w-full md:w-60 relative">
+            <div className="w-full md:w-72 relative">
               <Search className="absolute left-3 top-2.5 w-4 h-4 text-gray-400" />
               <Input
                 type="text"
                 placeholder="搜索内容..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-9 h-9 bg-white border-gray-100"
+                className="w-full pl-10 h-10 bg-white border-gray-100 rounded-xl focus-visible:ring-tech-primary-purple"
               />
             </div>
           </div>
 
-          {/* Featured Section (Ads) */}
+          {/* Featured Section */}
           <FeaturedSection items={featuredItems} />
 
           {/* Content Cards */}
           <div className="mb-8">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-semibold text-gray-800">所有内容</h2>
-              <span className="text-sm text-gray-500">
-                {filteredItems.length} 个结果
-              </span>
+            <div className="flex items-center mb-6">
+              <div className="w-1 h-6 bg-gradient-to-b from-tech-primary-purple to-tech-blue rounded-full mr-3"></div>
+              <h2 className="text-xl font-semibold text-gradient">全部资源</h2>
             </div>
             
             {currentItems.length > 0 ? (
@@ -133,8 +136,14 @@ const Index: React.FC = () => {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-16 bg-white rounded-lg border border-gray-100">
-                <p className="text-gray-500">没有找到符合条件的内容</p>
+              <div className="text-center py-20 bg-white rounded-xl border border-gray-100">
+                <div className="flex flex-col items-center justify-center">
+                  <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mb-4">
+                    <Search className="w-7 h-7 text-gray-300" />
+                  </div>
+                  <p className="text-gray-500 mb-2">暂无符合条件的内容</p>
+                  <p className="text-gray-400 text-sm">请尝试更换其他搜索关键词</p>
+                </div>
               </div>
             )}
             
@@ -175,6 +184,7 @@ const Index: React.FC = () => {
                                 paginate(page);
                               }}
                               isActive={currentPage === page}
+                              className={currentPage === page ? "bg-tech-primary-purple text-white border-none hover:bg-tech-primary-purple/90" : ""}
                             >
                               {page}
                             </PaginationLink>

@@ -26,19 +26,24 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({ category, isActive, onC
     <button
       onClick={onClick}
       className={cn(
-        "flex items-center w-full px-3 py-2.5 rounded-lg mb-1.5 transition-all duration-200",
+        "flex items-center w-full px-3 py-2.5 rounded-xl mb-2.5 transition-all duration-300",
         isActive
-          ? "bg-tech-primary-purple/10 text-tech-primary-purple font-medium"
-          : "bg-transparent text-gray-600 hover:bg-gray-100"
+          ? "bg-gradient-to-r from-tech-primary-purple/20 to-tech-primary-purple/5 text-tech-primary-purple font-medium backdrop-blur-sm border border-tech-primary-purple/10"
+          : "bg-white/50 text-gray-600 hover:bg-gray-50 border border-transparent hover:border-gray-100"
       )}
     >
       <div className={cn(
-        "flex items-center justify-center w-6 h-6 mr-2.5",
-        isActive ? "text-tech-primary-purple" : "text-gray-400"
+        "flex items-center justify-center w-8 h-8 mr-3 rounded-lg transition-all",
+        isActive ? "bg-white text-tech-primary-purple shadow-sm" : "bg-gray-50 text-gray-400"
       )}>
         <IconComponent className="w-4 h-4" />
       </div>
-      <span>{category.name}</span>
+      <span className="text-sm">{category.name}</span>
+      {isActive && (
+        <div className="ml-auto text-xs bg-white text-tech-primary-purple px-1.5 py-0.5 rounded-md">
+          精选
+        </div>
+      )}
     </button>
   );
 };
