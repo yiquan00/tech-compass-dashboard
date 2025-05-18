@@ -2,7 +2,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Category } from "@/data/navigationData";
-import { Star, LayoutTemplate, Compass, LayoutDashboard, LayoutList, Zap } from "lucide-react";
+import { Star, LayoutTemplate, Compass, LayoutDashboard, LayoutList, Zap, Circuit, Hexagon, Sparkles } from "lucide-react";
 
 interface CategoryButtonProps {
   category: Category;
@@ -17,6 +17,8 @@ const iconComponents: Record<string, React.FC<{ className?: string }>> = {
   "layout-dashboard": LayoutDashboard,
   "layout-list": LayoutList,
   zap: Zap,
+  hexagon: Hexagon,
+  sparkles: Sparkles
 };
 
 const CategoryButton: React.FC<CategoryButtonProps> = ({ category, isActive, onClick }) => {
@@ -34,7 +36,9 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({ category, isActive, onC
     >
       <div className={cn(
         "flex items-center justify-center w-8 h-8 mr-3 rounded-lg transition-all",
-        isActive ? "bg-gradient-to-br from-tech-primary-purple to-tech-blue text-white shadow-md" : "bg-gray-50 text-gray-400"
+        isActive 
+          ? "bg-gradient-to-br from-tech-primary-purple to-tech-blue text-white shadow-md" 
+          : "bg-gray-50 text-gray-400"
       )}>
         <IconComponent className="w-4 h-4" />
       </div>
