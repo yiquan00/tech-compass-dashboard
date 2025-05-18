@@ -2,7 +2,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Category } from "@/data/navigationData";
-import { Star, LayoutTemplate, Compass, LayoutDashboard, LayoutList, Zap, Circuit, Hexagon, Sparkles } from "lucide-react";
+import { Star, LayoutTemplate, Compass, LayoutDashboard, LayoutList, Zap, CircuitBoard, Hexagon, Sparkles } from "lucide-react";
 
 interface CategoryButtonProps {
   category: Category;
@@ -17,6 +17,7 @@ const iconComponents: Record<string, React.FC<{ className?: string }>> = {
   "layout-dashboard": LayoutDashboard,
   "layout-list": LayoutList,
   zap: Zap,
+  "circuit-board": CircuitBoard,
   hexagon: Hexagon,
   sparkles: Sparkles
 };
